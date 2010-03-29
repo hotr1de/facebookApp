@@ -5,8 +5,8 @@ $appapikey = '59f818f601c19ba21c6124f6631b23cf';
 $appsecret = 'ac08c579883901c53ac76d3296f4daaa';
 $facebook = new Facebook($appapikey, $appsecret);
 $user_id = $facebook->require_login();
-//$currentUser = $facebook->api_client->users_getLoggedInUser();
-$userFullName = $facebook->api_client->users_getInfo($user_id,'first_name, last_name');
+$currentUser = $facebook->api_client->users_getLoggedInUser();
+$userFullName = $facebook->api_client->users_getInfo($currentUser,'first_name, last_name');
 $userFullName = $userFullName[0]['first_name']." ".$userFullName[0]['last_name'];
 
 // Greet the currently logged-in user!
