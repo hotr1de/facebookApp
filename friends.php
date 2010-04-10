@@ -15,26 +15,24 @@ $userFullName = $userFullName[0]['first_name']." ".$userFullName[0]['last_name']
 
 // Greet the currently logged-in user!
 echo "<p>Hello, $userFullName</p>";
+$interest = $_GET['interest'];
+
+//$friends = $facebook->api_client->friends_get();
+
+$info = $facebook->api_client->users_getInfo($currentUser,'music'); 
+$music = $info[0]['music'];
+$music = preg_split("/,/",$music);
+
 
 //use 32104238 as user 
-$info = $facebook->api_client->users_getInfo($currentUser,'music,interests,movies');
+$samInfo = $facebook->api_client->users_getInfo('32104238','music');
+$samMusic = $samInfo[0]['music'];
+$samMusic = preg_split("/,/",$samMusic);
 
-$music = $info[0]['music'];
-$interests = $info[0]['interests'];
-$movies = $info[0]['movies'];
-$info = $music.",".$interests.",".$movies;;
-$info = preg_split("/,/",$info);
-
-$friends = $facebook->api_client->friends_get();
-echo count($friends);
-
-?><div style="width:600px;"><?php
-foreach($info as $tag) {
-   trim($tag);
-   echo "<a href='friends.php?interest=$tag' style='text-decoration:none'>\n";
-   echo "<font style='font-size:".rand(8,20)."px; color:rgb(".rand(0,255).",".rand(0,255).",".rand(0,255).");'>$tag</font>\n";
-   echo "</a>\n";
+foreach($music as $band) {
+  if( in_array($band, $samMusic) ) echo $band;
 }
 
-?></div><?php
 ?>
+
+
