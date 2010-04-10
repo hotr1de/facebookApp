@@ -13,48 +13,30 @@ $currentUser = $facebook->api_client->users_getLoggedInUser();
 $userFullName = $facebook->api_client->users_getInfo($currentUser,'first_name, last_name');
 $userFullName = $userFullName[0]['first_name']." ".$userFullName[0]['last_name'];
 
-// Greet the currently logged-in user!
-echo "<p>Hello, $userFullName</p>";
+//retrieve interest to compare with
 $interest = $_GET['interest'];
 
+//retrieve list of friends
 $friends = $facebook->api_client->friends_get();
-$info = $facebook->api_client->users_getInfo($currentUser,'music'); 
-$music = $info[0]['music'];
-$music = preg_split("/,/",$music);
 
-/* compare music of two users
-//use 32104238 as user 
-$samInfo = $facebook->api_client->users_getInfo('32104238','music');
-$samMusic = $samInfo[0]['music'];
-$samMusic = preg_split("/,/",$samMusic);
-
-foreach($music as $band) {
-  if( in_array($band, $samMusic) ) echo $band;
-}
-*/
+/* compare interest with 100 friends
 for($i = 0; $i < 100; $i++) {
-   $friendInfo = $facebook->api_client->users_getInfo($friends[$i],'music,name');
+   $friendInfo=$facebook->api_client->users_getInfo($friends[$i],'music,name');
    $friendMusic = $friendInfo[0]['music'];
    $friendName = $friendInfo[0]['name'];
    $friendMusic = preg_split("/,/",$friendMusic);
-   foreach($friendMusic as $friendBand) {
-      if(in_array($friendBand, $music)) {
-         echo "$friendBand - ".$friends[$i]." $friendName<br>";
-      }
-   }
-}
-/*
-foreach($friends as $friend) {
-   $friendInfo = $facebook->api_client->users_getInfo($friend,'music');
-   $friendMusic = $friendInfo[0]['music'];
-   $friendMusic = preg_split("/,/",$friendMusic);
-   foreach($friendMusic as $friendBand) {
-      if(in_array($friendBand, $music)) {
-         echo "$friendBand - $friend";
-      }
+   if(in_array($interest, $friendMusic)) {
+         echo "$interest - ".$friends[$i]." $friendName<br>";
    }
 }
 */
+
+//use FQL to do the task
+
+$query = "SELECT name FROM group WHERE gid IN (SELECT gid FROM group_member WHERE uid = '$currentUser')";
+$result=$facebook->api_client->fql_query($query);
+print_r($result);
+
 ?>
 
 
