@@ -4,6 +4,7 @@
 error_reporting(E_ALL);
 
 //require_once 'includes/binTree.php';
+require_once 'includes/binTree.php';
 require_once 'facebookAPI/facebook-platform/php/facebook.php';
 $appapikey = '59f818f601c19ba21c6124f6631b23cf';
 $appsecret = 'ac08c579883901c53ac76d3296f4daaa';
@@ -13,29 +14,33 @@ $currentUser = $facebook->api_client->users_getLoggedInUser();
 $userFullName = $facebook->api_client->users_getInfo($currentUser,'first_name, last_name');
 $userFullName = $userFullName[0]['first_name']." ".$userFullName[0]['last_name'];
 
+echo "<link rel='stylesheet' href='includes/style.css' media='screen' type='text/css'>";
+
 //retrieve interest to compare with
-$interest = $_GET['interest'];
+$interest = $_GET['tag'];
+$interest = str_replace("_"," ",$interest);
+$interest = trim($interest);
 
-//retrieve list of friends
-$friends = $facebook->api_client->friends_get();
+//use FQL to do to compare interests
+$query = "SELECT uid, name, pic_big, hometown_location, activities, interests, music, tv, movies, books, profile_url FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = 32104247)";
 
-/* compare interest with 100 friends
-for($i = 0; $i < 100; $i++) {
-   $friendInfo=$facebook->api_client->users_getInfo($friends[$i],'music,name');
-   $friendMusic = $friendInfo[0]['music'];
-   $friendName = $friendInfo[0]['name'];
-   $friendMusic = preg_split("/,/",$friendMusic);
-   if(in_array($interest, $friendMusic)) {
-         echo "$interest - ".$friends[$i]." $friendName<br>";
+$result=$facebook->api_client->fql_query($query);
+$hasInCommon = array();
+$name = "";
+for($i = 0; $i < count($result); $i++) {
+   if(stristr($result[$i]['music'], $interest) || 
+      stristr($result[$i]['activities'], $interest) || 
+      stristr($result[$i]['interests'], $interest) || 
+      stristr($result[$i]['tv'], $interest) || 
+      stristr($result[$i]['movies'], $interest) ||  
+      stristr($result[$i]['books'], $interest)  
+     ) { 
+     array_push($hasInCommon, $result[$i]['name']);
    }
 }
-*/
 
-//use FQL to do the task
-
-$query = "SELECT name FROM group WHERE gid IN (SELECT gid FROM group_member WHERE uid = '$currentUser')";
-$result=$facebook->api_client->fql_query($query);
-print_r($result);
+$friendTree = buildTree($hasInCommon);
+$friendTree->prin(1,0);
 
 ?>
 
