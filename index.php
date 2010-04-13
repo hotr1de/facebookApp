@@ -30,7 +30,7 @@ $books = $info[0]['books'];
 $info = $music.",".$interests.",".$movies.",".$activities.",".$tv.",".$books;
 $info = preg_split("/,/",$info);
 
-$infoTree = buildtree($info);
+$infoTree = buildtree($info, "info");
 ?>
 <div style="width:500px;">
 <?php $infoTree->prin(1,0); ?>

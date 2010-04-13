@@ -39,7 +39,7 @@ for($i = 0; $i < count($result); $i++) {
    }
 }
 
-$friendTree = buildTree($hasInCommon);
+$friendTree = buildTree($hasInCommon, "user");
 $friendTree->prin(1,0);
 
 ?>
