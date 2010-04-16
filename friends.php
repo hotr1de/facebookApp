@@ -25,7 +25,8 @@ $interest = trim($interest);
 $query = "SELECT uid, name, pic_big, hometown_location, activities, interests, music, tv, movies, books, profile_url FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = 32104247)";
 
 $result=$facebook->api_client->fql_query($query);
-$hasInCommon = array();
+$hasInCommonNm = array();
+$hasInCommonID = array();
 $name = "";
 for($i = 0; $i < count($result); $i++) {
    if(stristr($result[$i]['music'], $interest) || 
@@ -35,12 +36,18 @@ for($i = 0; $i < count($result); $i++) {
       stristr($result[$i]['movies'], $interest) ||  
       stristr($result[$i]['books'], $interest)  
      ) { 
-     array_push($hasInCommon, $result[$i]['name']);
+     array_push($hasInCommonNm, $result[$i]['name']);
+     array_push($hasInCommonID, $result[$i]['uid']);
    }
 }
-
-$friendTree = buildTree($hasInCommon, "user");
-$friendTree->prin(1,0);
+$_POST['users'] = $hasInCommonID;
+$friendTree = buildTree($hasInCommonNm, "user");
+?>
+Friends who like <?php echo $interest; ?>
+<div style="width:500px;">
+<?php $friendTree->prin(1,0); ?>
+</div>
+<?php
 
 ?>
 

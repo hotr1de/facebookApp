@@ -10,16 +10,18 @@ $appsecret = 'ac08c579883901c53ac76d3296f4daaa';
 $facebook = new Facebook($appapikey, $appsecret);
 $user_id = $facebook->require_login();
 $currentUser = $facebook->api_client->users_getLoggedInUser();
-$userFullName = $facebook->api_client->users_getInfo($currentUser,'first_name, last_name');
-$userFullName = $userFullName[0]['first_name']." ".$userFullName[0]['last_name'];
-
+$userFullName = $facebook->api_client->users_getInfo($currentUser,'name');
+$userFullName = $userFullName[0]['name'];
 echo "<link rel='stylesheet' href='includes/style.css' media='screen' type='text/css'>";
 
-// Greet the currently logged-in user!
-echo "<p>Hello, $userFullName</p>";
+if(isset($_GET['uid'])) $currentUser = $_GET['uid'];
+if(isset($_GET['name'])) $userFullName = $_GET['name'];
+
+// state whose info it is
+echo "<p>$userFullName likes :</p>";
 
 //use 32104238 as user 
-$info = $facebook->api_client->users_getInfo('32104238','music,interests,movies, activities, tv, books');
+$info = $facebook->api_client->users_getInfo($currentUser,'music,interests,movies, activities, tv, books');
 
 $music = $info[0]['music'];
 $interests = $info[0]['interests'];
@@ -32,7 +34,7 @@ $info = preg_split("/,/",$info);
 
 $infoTree = buildtree($info, "info");
 ?>
-<div style="width:500px;">
+<div style="width:400px;">
 <?php $infoTree->prin(1,0); ?>
 </div>
 <?php
