@@ -20,7 +20,6 @@ if(isset($_GET['name'])) $userFullName = $_GET['name'];
 // state whose info it is
 echo "<p>$userFullName likes :</p>";
 
-//use 32104238 as user 
 $info = $facebook->api_client->users_getInfo($currentUser,'music,interests,movies, activities, tv, books');
 
 $music = $info[0]['music'];
@@ -30,7 +29,10 @@ $activities = $info[0]['activities'];
 $tv = $info[0]['tv'];
 $books = $info[0]['books'];
 $info = $music.",".$interests.",".$movies.",".$activities.",".$tv.",".$books;
-$info = preg_split("/,/",$info);
+
+//splits the info string delimited by commas and periods
+//and puts each element in the new info array
+$info = preg_split("/[,.\/]+/",$info);
 
 $infoTree = buildtree($info, "info");
 ?>

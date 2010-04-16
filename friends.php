@@ -22,7 +22,7 @@ $interest = str_replace("_"," ",$interest);
 $interest = trim($interest);
 
 //use FQL to do to compare interests
-$query = "SELECT uid, name, pic_big, hometown_location, activities, interests, music, tv, movies, books, profile_url FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = 32104247)";
+$query = "SELECT uid, name, pic_big, hometown_location, activities, interests, music, tv, movies, books, profile_url FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = '$currentUser')";
 
 $result=$facebook->api_client->fql_query($query);
 $hasInCommonNm = array();
