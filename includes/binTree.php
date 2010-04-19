@@ -38,9 +38,11 @@ class binTree
     {
 	if ($this->left == null) {
 	    $this->data = array_pop($arr);
+            //$this->data = html_entity_decode($this->data);
             $id = array_pop($_POST['users']);
+            $pic = array_pop($_POST['pics']);
             $cleanUsr = str_replace(" ","_",trim($this->data));
-            $this->data = "<a href='index.php?uid=$id&name=$this->data'><font style='color:rgb(".rand(0,255).",".rand(0,255).",".rand(0,255)."); font-size:".rand(8,16)."pt'>".$this->data."</font></a>";
+            $this->data = "<a href='index.php?uid=$id&name=$this->data' onMouseOver=\"document.getElementById('pic').innerHTML = '<img src=$pic />'\" onMouseOut=\"document.getElementById('pic').innerHTML = '';\"><font style='color:rgb(".rand(0,255).",".rand(0,255).",".rand(0,255)."); font-size:".rand(8,16)."pt'>".$this->data."</font></a>";
 	} else {
 	    $this->left->addUser($arr);
 	    $this->right->addUser($arr);

@@ -22,11 +22,12 @@ $interest = str_replace("_"," ",$interest);
 $interest = trim($interest);
 
 //use FQL to do to compare interests
-$query = "SELECT uid, name, pic_big, hometown_location, activities, interests, music, tv, movies, books, profile_url FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = '$currentUser')";
+$query = "SELECT uid, name, pic, hometown_location, activities, interests, music, tv, movies, books, profile_url FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = '$currentUser')";
 
 $result=$facebook->api_client->fql_query($query);
 $hasInCommonNm = array();
 $hasInCommonID = array();
+$pics = array();
 $name = "";
 for($i = 0; $i < count($result); $i++) {
    if(stristr($result[$i]['music'], $interest) || 
@@ -38,17 +39,20 @@ for($i = 0; $i < count($result); $i++) {
      ) { 
      array_push($hasInCommonNm, $result[$i]['name']);
      array_push($hasInCommonID, $result[$i]['uid']);
+     array_push($pics, $result[$i]['pic']);
    }
 }
 $_POST['users'] = $hasInCommonID;
+$_POST['pics'] = $pics;
 $friendTree = buildTree($hasInCommonNm, "user");
 ?>
 Friends who like <?php echo $interest; ?>
+<div style="width:50px; height:50px;" id="pic"></div>
+
 <div style="width:500px;">
 <?php $friendTree->prin(1,0); ?>
 </div>
 <?php
-
 ?>
 
 
