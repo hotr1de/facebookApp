@@ -55,9 +55,7 @@ $friendTree = buildTree($hasInCommonNm, "user");
 ?>
 
 
-Friends who like <?php echo $interest; ?>
-<div style="width:50px; height:50px;" id="pic"></div>
-
+Friends who like <i><?php echo $interest; ?></i>
 <div style="width:500px;">
 <?php $friendTree->prin(1,0); ?>
 </div>

@@ -17,6 +17,9 @@ echo "<link rel='stylesheet' href='includes/style.css' media='screen' type='text
 if(isset($_GET['uid'])) $currentUser = $_GET['uid'];
 if(isset($_GET['name'])) $userFullName = $_GET['name'];
 
+if(isset($_POST['users'])) unset($_POST['users']);
+if(isset($_POST['pics'])) unset($_POST['pics']);
+
 // state whose info it is
 echo "<p>$userFullName likes :</p>";
 
@@ -32,7 +35,7 @@ $info = $music.",".$interests.",".$movies.",".$activities.",".$tv.",".$books;
 
 //splits the info string delimited by commas and periods
 //and puts each element in the new info array
-$info = preg_split("/[,.\/]+/",$info);
+$info = preg_split("/[,.\/\;]+/",$info);
 
 $infoTree = buildtree($info, "info");
 ?>
