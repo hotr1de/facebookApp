@@ -3,6 +3,14 @@
 
 error_reporting(E_ALL);
 
+?>
+<head>
+<link rel='stylesheet' href='includes/style.css' media='screen' type='text/css'>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="includes/tooltip.js" media="screen"></script>
+</head>
+<body>
+<?php
 //require_once 'includes/binTree.php';
 require_once 'includes/binTree.php';
 require_once 'facebookAPI/facebook-platform/php/facebook.php';
@@ -14,7 +22,6 @@ $currentUser = $facebook->api_client->users_getLoggedInUser();
 $userFullName = $facebook->api_client->users_getInfo($currentUser,'first_name, last_name');
 $userFullName = $userFullName[0]['first_name']." ".$userFullName[0]['last_name'];
 
-echo "<link rel='stylesheet' href='includes/style.css' media='screen' type='text/css'>";
 
 //retrieve interest to compare with
 $interest = $_GET['tag'];
@@ -46,6 +53,8 @@ $_POST['users'] = $hasInCommonID;
 $_POST['pics'] = $pics;
 $friendTree = buildTree($hasInCommonNm, "user");
 ?>
+
+
 Friends who like <?php echo $interest; ?>
 <div style="width:50px; height:50px;" id="pic"></div>
 
@@ -55,4 +64,5 @@ Friends who like <?php echo $interest; ?>
 <?php
 ?>
 
-
+</body>
+</html>
