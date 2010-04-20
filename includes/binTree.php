@@ -38,7 +38,6 @@ class binTree
     {
 	if ($this->left == null) {
 	    $this->data = array_pop($arr);
-            //$this->data = html_entity_decode($this->data);
             $id = array_pop($_POST['users']);
             $pic = array_pop($_POST['pics']);
             $cleanUsr = str_replace(" ","_",trim($this->data));
@@ -52,7 +51,7 @@ class binTree
     function prin($horizontal, $hCount)
     {
 	if ($this->left == null && $this->right == null) {
-		echo $this->data;
+		echo utf8_decode($this->data);
 	} elseif ($horizontal && ($hCount < 3)) {
                 $hCount++;
 		echo "<table><tr><td valign='middle'>";

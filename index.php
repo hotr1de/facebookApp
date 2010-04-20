@@ -12,8 +12,14 @@ $user_id = $facebook->require_login();
 $currentUser = $facebook->api_client->users_getLoggedInUser();
 $userFullName = $facebook->api_client->users_getInfo($currentUser,'name');
 $userFullName = $userFullName[0]['name'];
-echo "<link rel='stylesheet' href='includes/style.css' media='screen' type='text/css'>";
 
+?>
+<html>
+<head>
+<link rel='stylesheet' href='includes/style.css' media='screen' type='text/css'></head>
+<body>
+
+<?php
 if(isset($_GET['uid'])) $currentUser = $_GET['uid'];
 if(isset($_GET['name'])) $userFullName = $_GET['name'];
 
@@ -36,9 +42,10 @@ $info = $music.",".$interests.",".$movies.",".$activities.",".$tv.",".$books;
 //splits the info string delimited by commas and periods
 //and puts each element in the new info array
 $info = preg_split("/[,.\/\;]+/",$info);
-
 $infoTree = buildtree($info, "info");
 ?>
+
+
 <div style="width:400px;">
 <?php $infoTree->prin(1,0); ?>
 </div>
@@ -46,4 +53,5 @@ $infoTree = buildtree($info, "info");
 
 ?>
 
-
+</body>
+</html>
