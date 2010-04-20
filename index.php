@@ -30,8 +30,9 @@ $userSmallPic = $userSmallPic[0]['pic_square'];
 if(isset($_POST['users'])) unset($_POST['users']);
 if(isset($_POST['pics'])) unset($_POST['pics']);
 
+$likesStr = "$userFullName likes:";
 // state whose info it is
-echo "<p>$userFullName <img src='$userSmallPic' /> likes :</p>";
+echo "<div style='height:50px; width:".(strlen($likesStr) * 15)."px; border:3px solid #3B5998'><img src='$userSmallPic' align='left' style='border-right:3px solid #3B5998'/><div style='float:left; margin-top:14px; margin-left:10px;'>$likesStr</div></div>";
 
 $info = $facebook->api_client->users_getInfo($user_id,'music,interests,movies, activities, tv, books');
 
