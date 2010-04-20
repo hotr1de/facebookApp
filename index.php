@@ -13,7 +13,6 @@ $user_id = $facebook->require_login();
 //$currentUser = $facebook->api_client->users_getLoggedInUser();
 $userFullName = $facebook->api_client->users_getInfo($user_id,'name');
 $userFullName = $userFullName[0]['name'];
-
 ?>
 <html>
 <head>
@@ -24,12 +23,15 @@ $userFullName = $userFullName[0]['name'];
 if(isset($_GET['uid'])) $user_id = $_GET['uid'];
 if(isset($_GET['name'])) $userFullName = $_GET['name'];
 
+$userSmallPic = $facebook->api_client->users_getInfo($user_id,'pic_square');
+$userSmallPic = $userSmallPic[0]['pic_square'];
+
 //unset 'shared' users data if it exists
 if(isset($_POST['users'])) unset($_POST['users']);
 if(isset($_POST['pics'])) unset($_POST['pics']);
 
 // state whose info it is
-echo "<p>$userFullName likes :</p>";
+echo "<p>$userFullName <img src='$userSmallPic' /> likes :</p>";
 
 $info = $facebook->api_client->users_getInfo($user_id,'music,interests,movies, activities, tv, books');
 
