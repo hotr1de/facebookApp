@@ -61,7 +61,7 @@ $_POST['pics'] = $pics;
 $friendTree = buildTree($hasInCommonNm, "user");
 ?>
 
-Friends who like <i><?php echo $interest; ?></i>
+Friends who like <i><?php echo utf8_decode($interest); ?></i>
 
 <div style="width:500px;">
 <?php $friendTree->prin(1,0); ?>
