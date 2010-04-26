@@ -13,6 +13,10 @@ $user_id = $facebook->require_login();
 //$currentUser = $facebook->api_client->users_getLoggedInUser();
 $userFullName = $facebook->api_client->users_getInfo($user_id,'name');
 $userFullName = $userFullName[0]['name'];
+
+//$message = 'in ur tubez'; 
+//$facebook->api_client->stream_publish($message);
+
 ?>
 <html>
 <head>
@@ -32,7 +36,7 @@ if(isset($_POST['pics'])) unset($_POST['pics']);
 
 $likesStr = utf8_decode($userFullName)." likes:";
 // state whose info it is
-echo "<div style='height:50px; width:".(strlen($likesStr) * 15)."px; border:3px solid #3B5998'><img src='$userSmallPic' align='left' style='border-right:3px solid #3B5998'/><div style='float:left; margin-top:14px; margin-left:10px;'>$likesStr</div></div>";
+echo "<div style='height:50px; width:".(strlen($likesStr) * 15)."px; border:3px solid #3B5998; background: #ffffff'><img src='$userSmallPic' align='left' style='border-right:3px solid #3B5998'/><div style='float:left; margin-top:14px; margin-left:10px;'>$likesStr</div></div>";
 
 $info = $facebook->api_client->users_getInfo($user_id,'music,interests,movies, activities, tv, books');
 

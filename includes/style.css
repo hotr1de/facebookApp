@@ -3,6 +3,7 @@ body {
   font-size:14pt; 
   font-weight:800;
   color: #333333;
+  background: #ccffff;
 }
 
 table {
@@ -24,4 +25,11 @@ td a, a:link, a:visited, a:hover {
   text-decoration:none;
 }
 
+.cloud {
+  background-color: #ffffff;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
 

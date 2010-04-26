@@ -17,10 +17,6 @@ $appsecret = 'ac08c579883901c53ac76d3296f4daaa';
 $facebook = new Facebook($appapikey, $appsecret);
 //require the user to be logged in
 $user_id = $facebook->require_login();
-//$currentUser = $facebook->api_client->users_getLoggedInUser();
-//echo $user_id;
-//$userFullName = $facebook->api_client->users_getInfo($currentUser,'first_name, last_name');
-//$userFullName = $userFullName[0]['first_name']." ".$userFullName[0]['last_name'];
 
 //retrieve interest to compare with
 $interest = $_GET['tag'];
@@ -59,15 +55,20 @@ $_POST['pics'] = $pics;
 
 //build cloud displaying usernames
 $friendTree = buildTree($hasInCommonNm, "user");
+
+if(count($hasInCommonNm) > 1) {
 ?>
-
-Friends who like <i><?php echo utf8_decode($interest); ?></i>
-
-<div style="width:500px;">
-<?php $friendTree->prin(1,0); ?>
-</div>
-
+	Your friends who like <i><?php echo utf8_decode($interest); ?></i>
+	<div style="width:500px;">
+	<?php $friendTree->prin(1,0); ?>
+        <br><a href="javascript:history.go(-1);">back</a>
+	</div>
 <?php
+}
+else {
+   echo $hasInCommonNm[0]." is your only friend that enjoys <i>$interest</i>.<br><br>";
+   echo "<a href='javascript:history.go(-1);'>back</a>";
+}  
 ?>
 
 </body>

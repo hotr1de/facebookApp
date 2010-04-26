@@ -27,7 +27,8 @@ class binTree
 	if ($this->left == null) {
 	    $this->data = array_pop($arr);
             $cleanTag = str_replace(" ","_",trim($this->data));
-            $this->data = "<a href='friends.php?tag=$cleanTag'><font style='color:rgb(".rand(0,128).",".rand(0,128).",".rand(0,128)."); font-size:".rand(8,16)."pt'>".$this->data."</font></a>";
+            $link = "'friends.php?tag=$cleanTag'";
+            $this->data = "<div class='cloud' onClick=\"window.location=$link\"><font style='color:rgb(".rand(0,128).",".rand(0,128).",".rand(0,128)."); font-size:".rand(8,16)."pt'>".$this->data."</font></div>";
 	} else {
 	    $this->left->addInfo($arr);
 	    $this->right->addInfo($arr);
@@ -41,7 +42,8 @@ class binTree
             $id = array_pop($_POST['users']);
             $pic = array_pop($_POST['pics']);
             $cleanUsr = str_replace(" ","_",trim($this->data));
-            $this->data = "<a href='index.php?uid=$id&name=$this->data' onMouseOver=\"doTooltip(event, 0, '$pic');\" onMouseOut='hideTip()'><font style='color:rgb(".rand(0,128).",".rand(0,128).",".rand(0,128)."); font-size:".rand(8,16)."pt'>".$this->data."</font></a>";
+            $link = "'index.php?uid=$id&name=$this->data'";
+            $this->data = "<div class='cloud' onMouseOver=\"doTooltip(event, 0, '$pic');\" onMouseOut='hideTip()' onClick=\"window.location=$link\"><font style='color:rgb(".rand(0,128).",".rand(0,128).",".rand(0,128)."); font-size:".rand(8,16)."pt'>".$this->data."</font></div>";
 	} else {
 	    $this->left->addUser($arr);
 	    $this->right->addUser($arr);
