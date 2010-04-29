@@ -46,12 +46,20 @@ $movies = $info[0]['movies'];
 $activities = $info[0]['activities'];
 $tv = $info[0]['tv'];
 $books = $info[0]['books'];
-$info = $music.",".$interests.",".$movies.",".$activities.",".$tv.",".$books;
+
+$tags = "";
+if($music) $tags .= $music.",";
+if($interests) $tags .= $interests.",";
+if($movies) $tags .= $movies.",";
+if($activities) $tags .= $activities;
+if($tv) $tags .= $tv.",";
+if($books) $tags .= $books;
 
 //splits the info string delimited by , ; / .
 //and puts each element in the new info array
-$info = preg_split("/[,.\/\;]+/",$info);
-$infoTree = buildtree($info, "info");
+$tags = preg_split("/[,.\/\;]+/",$tags);
+array_pop($tags);
+$infoTree = buildtree($tags, "info");
 ?>
 
 
@@ -59,7 +67,6 @@ $infoTree = buildtree($info, "info");
 <?php $infoTree->prin(1,0); ?>
 </div>
 <?php
-
 ?>
 
 </body>

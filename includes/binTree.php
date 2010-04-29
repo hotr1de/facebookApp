@@ -56,20 +56,20 @@ class binTree
 		echo utf8_decode($this->data);
 	} elseif ($horizontal && ($hCount < 3)) {
                 $hCount++;
-		echo "<table><tr><td valign='middle'>";
+		echo "<table><tr><td valign='middle'>\n";
 		$this->left->prin(!$horizontal, $hCount);
-		echo "</td><td valign='middle'>";
+		echo "</td><td valign='middle'>\n";
 		$this->right->prin(!$horizontal, $hCount);
 		echo "</td></tr>\n</table>\n";
 	} else {
-		echo "<table><tr><td valign='middle'>";
+		echo "<table><tr><td valign='middle'>\n";
 		$this->left->prin(!$horizontal, $hCount);
-		echo "</td></tr> <tr><td valign='middle'>";
+		echo "</td></tr> <tr><td valign='middle'>\n";
 		$this->right->prin(!$horizontal, $hCount);
-		echo "</td></tr></table>";
+		echo "</td></tr></table>\n";
 	}
     }
-    
+/* 
     function printHTML($horizontal)
     {
 	if ($this->left == null && $this->right == null) {
@@ -88,6 +88,7 @@ class binTree
 		echo "</td></tr></table>";
 	}
     }
+*/
 }
 
 
