@@ -26,7 +26,8 @@ class binTree
     {
 	if ($this->left == null) {
 	    $this->data = array_pop($arr);
-            $cleanTag = str_replace(" ","_",trim($this->data));
+            $cleanTag = trim($this->data);
+            $cleanTag = urlencode($cleanTag);
             $link = "'friends.php?tag=$cleanTag'";
             $this->data = "<div class='cloud' onClick=\"window.location=$link\"><font style='color:rgb(".rand(0,128).",".rand(0,128).",".rand(0,128)."); font-size:".rand(8,16)."pt'>".$this->data."</font></div>";
 	} else {
@@ -42,8 +43,9 @@ class binTree
             $id = array_pop($_POST['users']);
             $pic = array_pop($_POST['pics']);
             $cleanUsr = str_replace(" ","_",trim($this->data));
+            $htmlUsr = utf8_decode(html_entity_decode($this->data));
             $link = "'index.php?uid=$id&name=$this->data'";
-            $this->data = "<div class='cloud' onMouseOver=\"doTooltip(event, 0, '$pic');\" onMouseOut='hideTip()' onClick=\"window.location=$link\"><font style='color:rgb(".rand(0,128).",".rand(0,128).",".rand(0,128)."); font-size:".rand(8,16)."pt'>".$this->data."</font></div>";
+            $this->data = "<div class='cloud' onMouseOver=\"doTooltip(event, 0, '$pic');\" onMouseOut='hideTip()' onClick=\"window.location=$link\"><font style='color:rgb(".rand(0,128).",".rand(0,128).",".rand(0,128)."); font-size:".rand(8,16)."pt'>".$htmlUsr."</font></div>";
 	} else {
 	    $this->left->addUser($arr);
 	    $this->right->addUser($arr);
@@ -53,7 +55,7 @@ class binTree
     function prin($horizontal, $hCount)
     {
 	if ($this->left == null && $this->right == null) {
-		echo utf8_decode($this->data);
+		echo $this->data;
 	} elseif ($horizontal && ($hCount < 3)) {
                 $hCount++;
 		echo "<table><tr><td valign='middle'>\n";

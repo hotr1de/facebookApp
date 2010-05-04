@@ -1,6 +1,7 @@
 <?php
 // Application: tag cloud 
 error_reporting(E_ALL);
+header('content-type: text/html; charset: utf-8'); 
 ?>
 <head>
 <link rel='stylesheet' href='includes/style.css' media='screen' type='text/css'>
@@ -20,8 +21,10 @@ $user_id = $facebook->require_login();
 
 //retrieve interest to compare with
 $interest = $_GET['tag'];
-$interest = str_replace("_"," ",$interest);
+//$interest = str_replace("_"," ",$interest);
 $interest = trim($interest);
+$interest = urldecode($interest);
+$interest = str_replace("\\", "", $interest);
 
 //use FQL to do to compare interests
 $query = "SELECT uid, name, pic, hometown_location, activities, interests, music, tv, movies, books, profile_url FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = '$user_id')";
