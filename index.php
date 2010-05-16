@@ -51,7 +51,7 @@ $tags = "";
 if($music) $tags .= $music.",";
 if($interests) $tags .= $interests.",";
 if($movies) $tags .= $movies.",";
-if($activities) $tags .= $activities;
+if($activities) $tags .= $activities.",";
 if($tv) $tags .= $tv.",";
 if($books) $tags .= $books;
 

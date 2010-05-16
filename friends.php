@@ -68,10 +68,14 @@ if(count($hasInCommonNm) > 1) {
 	</div>
 <?php
 }
-else {
-   echo $hasInCommonNm[0]." is your only friend that enjoys <i>$interest</i>.<br><br>";
+elseif(count($hasInCommonNm) == 1) {
+   echo utf8_decode(html_entity_decode($hasInCommonNm[0]))." is your only friend that enjoys <i>$interest</i>.<br><br>";
    echo "<a href='javascript:history.go(-1);'>back</a>";
 }  
+else {
+   echo "You are the only person that likes <i>$interest</i><br><br>";
+   echo "<a href='javascript:history.go(-1);'>back</a>";
+}
 ?>
 
 </body>
