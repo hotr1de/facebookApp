@@ -24,7 +24,15 @@ $userFullName = $userFullName[0]['name'];
 <body>
 
 <?php
+
+$back = true;
+
+//if user was directed to this page via friends.php
 if(isset($_GET['uid'])) $user_id = $_GET['uid'];
+//if not, display no back link
+else $back = false;
+
+//get the name of user that was clicked on from friends.php
 if(isset($_GET['name'])) $userFullName = $_GET['name'];
 
 $userSmallPic = $facebook->api_client->users_getInfo($user_id,'pic_square');
@@ -37,6 +45,8 @@ if(isset($_POST['pics'])) unset($_POST['pics']);
 $likesStr = utf8_decode($userFullName)." likes:";
 // state whose info it is
 echo "<div style='height:50px; width:".(strlen($likesStr) * 15)."px; border:3px solid #3B5998; background: #ffffff'><img src='$userSmallPic' align='left' style='border-right:3px solid #3B5998'/><div style='float:left; margin-top:14px; margin-left:10px;'>$likesStr</div></div>";
+
+if($back) echo "<br /><a href='javascript:history.go(-1)'>back</a>";
 
 $info = $facebook->api_client->users_getInfo($user_id,'music,interests,movies, activities, tv, books');
 

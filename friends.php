@@ -62,9 +62,9 @@ $friendTree = buildTree($hasInCommonNm, "user");
 if(count($hasInCommonNm) > 0) {
 ?>
 	Your friends who like <i><?php echo utf8_decode($interest); ?></i>
+        &nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:history.go(-1);">back</a>
 	<div style="width:500px;">
 	<?php $friendTree->prin(1,0); ?>
-        <br><a href="javascript:history.go(-1);">back</a>
 	</div>
 <?php
 }
