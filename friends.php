@@ -59,7 +59,7 @@ $_POST['pics'] = $pics;
 //build cloud displaying usernames
 $friendTree = buildTree($hasInCommonNm, "user");
 
-if(count($hasInCommonNm) > 1) {
+if(count($hasInCommonNm) > 0) {
 ?>
 	Your friends who like <i><?php echo utf8_decode($interest); ?></i>
 	<div style="width:500px;">
@@ -68,10 +68,6 @@ if(count($hasInCommonNm) > 1) {
 	</div>
 <?php
 }
-elseif(count($hasInCommonNm) == 1) {
-   echo utf8_decode(html_entity_decode($hasInCommonNm[0]))." is your only friend that enjoys <i>$interest</i>.<br><br>";
-   echo "<a href='javascript:history.go(-1);'>back</a>";
-}  
 else {
    echo "No one else likes <i>$interest</i><br><br>";
    echo "<a href='javascript:history.go(-1);'>back</a>";
