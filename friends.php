@@ -73,7 +73,7 @@ elseif(count($hasInCommonNm) == 1) {
    echo "<a href='javascript:history.go(-1);'>back</a>";
 }  
 else {
-   echo "You are the only person that likes <i>$interest</i><br><br>";
+   echo "No one else likes <i>$interest</i><br><br>";
    echo "<a href='javascript:history.go(-1);'>back</a>";
 }
 ?>
