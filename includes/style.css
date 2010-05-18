@@ -27,8 +27,11 @@ td a, a:link, a:visited, a:hover {
 
 .cloud {
   background-color: #ffffff;
+  border: 3px solid #ffffff;
+  /*
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
+  */
   padding: 5px;
   cursor: pointer;
 }

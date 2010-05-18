@@ -7,6 +7,43 @@ header('content-type: text/html; charset: utf-8');
 <link rel='stylesheet' href='includes/style.css' media='screen' type='text/css'>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="includes/tooltip.js" media="screen"></script>
+<script type='text/javaScript' src='includes/corners/curvycorners.src.js'></script>
+<script type="text/JavaScript">
+
+  addEvent(window, 'load', initCorners);
+
+  function initCorners() {
+    var settings = {
+      tl: { radius: 10 },
+      tr: { radius: 10 },
+      bl: { radius: 10 },
+      br: { radius: 10 },
+      antiAlias: true
+    }
+
+    /*
+    Usage:
+
+    curvyCorners(settingsObj, selectorStr);
+    curvyCorners(settingsObj, Obj1[, Obj2[, Obj3[, . . . [, ObjN]]]]);
+
+    selectorStr ::= complexSelector [, complexSelector]...
+    complexSelector ::= singleSelector[ singleSelector]
+    singleSelector ::= idType | classType
+    idType ::= #id
+    classType ::= [tagName].className
+    tagName ::= div|p|form|blockquote|frameset // others may work
+    className : .name
+    selector examples:
+      #mydiv p.rounded
+      #mypara
+      .rounded
+    */
+    curvyCorners(settings, ".cloud");
+  }
+
+</script>
+
 </head>
 <body>
 <?php
